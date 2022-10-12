@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Apna_Bank.Models.Transactions>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h5 class="text-center" style="font-family:'Times New Roman', Times, serif"><i class="fa-solid fa-hand-holding-dollar" style="color:maroon"></i>Transcation History</h5>
+
+<p><a asp-action="AddOrEdit" class="btn btn-success text-white">New Transcation</a></p>
+
+<table class="table" style="font-family:'Times New Roman', Times, serif">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BeneficiaryName)
+            </th>
+            
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BeneficiaryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.TransactionId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.TransactionId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.TransactionId">Delete</a>
+            </td>
+        </tr>
+}
+
+    </tbody>
+   
+</table>
+<style>
+    body {
+        background-color:aliceblue;
+       /* background-image: url('https://images.pexels.com/photos/534229/pexels-photo-534229.jpeg?auto=compress&cs=tinysrgb&w=600');*/
+        background-size:cover;
+    }
+</style>
