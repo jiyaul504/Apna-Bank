@@ -7,7 +7,7 @@
 @*<h1>Edit</h1>
 
 <h4>Transactions</h4>*@
-<hr />
+
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Edit">
@@ -24,6 +24,7 @@
                 </div>
                 <span asp-validation-for="AccountNumber" class="text-danger"></span>
             </div>
+            <br />
             <div class="row">
                 <div class="col-md-6">
                 <div class="form-group">
@@ -31,10 +32,7 @@
                     <input asp-for="BeneficiaryName" class="form-control" />
                     <span asp-validation-for="BeneficiaryName" class="text-danger"></span>
                 </div>
-                </div>
-
             </div>
-            <div class="row">
                 <div class="col-md-6">
                 <div class="form-group">
                     <label asp-for="BankName" class="control-label"></label>
@@ -43,23 +41,22 @@
                  </div>
                  </div>
             </div>
+            <br />
             <div class="row">
                 <div class="col-md-6">
                  <div class="form-group">
                      <label asp-for="IfscCode" class="control-label"></label>
                      <input asp-for="IfscCode" class="form-control" />
                      <span asp-validation-for="IfscCode" class="text-danger"></span>
-                 </div>
-                 </div>
+                 </div> 
             </div>
-            <div class="row">
                 <div class="col-md-6">
                  <div class="form-group">
                      <label asp-for="Amount" class="control-label"></label>
                      <div class="input-group">
                          <div class="input-group-prepend">
                              <div class="input-group-text">
-                                 <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
+                                    <i> &#x20B9;</i>
                              </div>
                          </div>
                          <input asp-for="Amount" class="form-control" />
@@ -67,17 +64,19 @@
                      <span asp-validation-for="Amount" class="text-danger"></span>
                  </div>
                  </div>
-            </div>
-            <br />
+                 </div>
+                 <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-success" />
             </div>
+
+
         </form>
     </div>
 </div>
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<br />
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
