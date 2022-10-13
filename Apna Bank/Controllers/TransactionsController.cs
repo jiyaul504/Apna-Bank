@@ -32,7 +32,7 @@ namespace Apna_Bank.Controllers
         {
             if(id == 0)
             {
-                return View();
+                return View(new TransactionModel());
             }
             var transactions = await _context.Transactioncs.FindAsync(id);
             if (transactions == null)
@@ -42,91 +42,48 @@ namespace Apna_Bank.Controllers
             return View(transactions);
 
         }
-
-        // POST: Transactions/Create
+        // POST: Transactions/AddOrEdit
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TransactionId,AccountNumber,BeneficiaryName,BankName,IfscCode,Amount")] Transactions transactions)
+        [NoDirectAccess]
+        public async Task<IActionResult> AddOrEdit(int id, [Bind("TransactionId,AccountNumber,BeneficiaryName,BankName,IfscCode,Amount,Date")] TransactionModel transactions)
         {
+           
             if (ModelState.IsValid)
             {
-                _context.Add(transactions);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(transactions);
-        }
-
-        // GET: Transactions/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Transactioncs == null)
-            {
-                return NotFound();
-            }
-
-            var transactions = await _context.Transactioncs.FindAsync(id);
-            if (transactions == null)
-            {
-                return NotFound();
-            }
-            return View(transactions);
-        }
-
-        // POST: Transactions/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TransactionId,AccountNumber,BeneficiaryName,BankName,IfscCode,Amount")] Transactions transactions)
-        {
-            if (id != transactions.TransactionId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
+                if (id == 0)
                 {
-                    _context.Update(transactions);
+                    transactions.Date=DateTime.Now;
+                    _context.Add(transactions);
                     await _context.SaveChangesAsync();
                 }
-                catch (DbUpdateConcurrencyException)
+                else
                 {
-                    if (!TransactionsExists(transactions.TransactionId))
+                    try
                     {
-                        return NotFound();
+                        _context.Update(transactions);
+                        await _context.SaveChangesAsync();
                     }
-                    else
+                    catch (DbUpdateConcurrencyException)
                     {
-                        throw;
+                        if (!TransactionsExists(transactions.TransactionId))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
+                
                 }
-                return RedirectToAction(nameof(Index));
+                return Json(new {isValid=true, Html= Helper.RenderRazorViewToString(this,"_ViewAll",_context.Transactioncs.ToList())} );
             }
-            return View(transactions);
+            return Json(new { isValid = false, Html = Helper.RenderRazorViewToString(this,"AddOrEdit",transactions)});
         }
 
-        // GET: Transactions/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Transactioncs == null)
-            {
-                return NotFound();
-            }
-
-            var transactions = await _context.Transactioncs
-                .FirstOrDefaultAsync(m => m.TransactionId == id);
-            if (transactions == null)
-            {
-                return NotFound();
-            }
-
-            return View(transactions);
-        }
+     
 
         // POST: Transactions/Delete/5
         [HttpPost, ActionName("Delete")]
@@ -144,7 +101,7 @@ namespace Apna_Bank.Controllers
             }
             
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Json(new { Html = Helper.RenderRazorViewToString(this, "_ViewAll", _context.Transactioncs.ToList()) });
         }
 
         private bool TransactionsExists(int id)

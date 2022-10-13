@@ -8,6 +8,6 @@ namespace Apna_Bank.Models
         {
 
         }
-        public DbSet<Transactions> Transactioncs { get; set; }
+        public DbSet<TransactionModel> Transactioncs { get; set; }
     }
 }

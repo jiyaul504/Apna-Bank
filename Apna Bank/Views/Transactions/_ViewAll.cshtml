@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Apna_Bank.Models.TransactionModel>
+
+<div class="table-responsive">
+<table class="table" style="font-family:'Times New Roman', Times, serif">
+    
+        <thead class="table-dark">
+    
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BeneficiaryName)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model =>model.Amount)
+            </th>
+            
+            <th>
+                <a onclick="showInPopup('@Url.Action("AddOrEdit","Transactions",null,Context.Request.Scheme)','New Transaction')" class="btn btn-success text-white"> New Transaction</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BeneficiaryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    <div>
+                    <a onclick="showInPopup('@Url.Action("AddOrEdit","Transactions",new{id=item.TransactionId},Context.Request.Scheme)','Update Transaction')" class="btn btn-primary text-white"> <i class="fa-sharp fa-solid fa-pen-to-square"></i>Edit</a>
+                    <form asp-action="Delete" asp-route-id="@item.TransactionId" onsubmit="return JqueryAjaxDelete(this);" class="d-inline">
+                        <input type="submit" value="Delete" class="btn btn-danger">
+                    </form>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
+</div>
+<style>
+    body {
+        background-color: aliceblue;
+        /* background-image: url('https://images.pexels.com/photos/534229/pexels-photo-534229.jpeg?auto=compress&cs=tinysrgb&w=600');*/
+        background-size: cover;
+    }
+</style>
