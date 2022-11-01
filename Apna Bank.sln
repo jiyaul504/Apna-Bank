@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Apna Bank", "Apna Bank\Apna Bank.csproj", "{DFCD243B-E2B0-462C-A04D-9BF24488B581}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Apna Bank", "Apna Bank\Apna Bank.csproj", "{DFCD243B-E2B0-462C-A04D-9BF24488B581}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6127D52D-8278-430E-ACCE-D4C3EFBA6C52}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

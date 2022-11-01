@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Apna_Bank.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Apna_Bank.Controllers
 {
+    [Authorize]
     public class TransactionsController : Controller
     {
         private readonly TransactionDBContext _context;

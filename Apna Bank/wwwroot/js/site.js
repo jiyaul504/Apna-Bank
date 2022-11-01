@@ -16,6 +16,7 @@ $(function () {
 
 
 
+
 showInPopup = (url, title) => {
     $.ajax({
         type: 'GET',
@@ -25,8 +26,7 @@ showInPopup = (url, title) => {
             $('#form-modal .modal-title').html(title);
             $('#form-modal').modal('show');
             $("#loaderbody").addClass('hide');
-
-
+         
         }   
         
     })

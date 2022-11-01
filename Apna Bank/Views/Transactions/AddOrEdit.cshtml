@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Edit";
 
+    Layout = null;
 }
 
 @*<h1>Edit</h1>
@@ -76,11 +77,8 @@
     </div>
 </div>
 
-<br />
-
-
-
-
+<form onsubmit="return false;" id="myForm">
+</form>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
